@@ -1,3 +1,4 @@
+//モデル設定
 package com.boot.demo.domain;
 
 import java.io.Serializable;
@@ -8,37 +9,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity  //JPAのデータクラス(エンティティ)であることを指定。
+//↓データのテーブル指定
 @Table(name="student")
 public class Student implements Serializable{
 //public class Product{
 
 	//private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
+	@Id   //プライマリーキー指定
+	@GeneratedValue(strategy = GenerationType.AUTO) //プライマリーキーの値を自動生成
+	@Column //フィールドに割り当てられるコラム名指定
 	private Integer id;
 
-	@Column(nullable = false)
+	@Column(nullable = false)  //フィールドに割り当てられるコラム名指定
 	private String name;
 
-	@Column(nullable = false)
+	@Column(nullable = false)   //   "
 	private Integer age;
 
-	@Column(nullable=false)
+	@Column(nullable=false)   //   "
 	private String sex;
 
-	@Column(nullable=false)
+	@Column(nullable=false)   //   "
 	private String birth;
 
-	@Column(nullable=false)
+	@Column(nullable=false)   //   "
 	private String address;
 
-	@Column(nullable=false)
+	@Column(nullable=false)   //   "
 	private String tel;
 
-	@Column(nullable=false)
+	@Column(nullable=false)   //   "
 	private String mail;
 
 	public Student() {
@@ -56,6 +58,8 @@ public class Student implements Serializable{
 		this.tel = tel;
 		this.mail = mail;
 	}
+
+	//Getter, Setter
 
 	public Integer getId() {
 		return id;

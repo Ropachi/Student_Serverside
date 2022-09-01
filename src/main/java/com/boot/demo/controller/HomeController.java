@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     @GetMapping("/")
     String home(){
-        return "Hello Student!";
+        return "Hello, Student from Serverside!";
     }
 }

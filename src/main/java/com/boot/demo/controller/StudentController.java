@@ -20,27 +20,38 @@ public class StudentController {
 		this.repository = repository;
 	}
 
+	//全てのデータを取得
+	  //ルーティング
 	@GetMapping("/find")
 	public List<Student> findAll(){
 		List<Student> list = repository.findAll();
 		return list;
 	}
 
+	//IDで検索
+	  //リクエスト時のアドレス指定
 	@RequestMapping(value = "/findid/{id}", method = RequestMethod.GET)
+									  //↓パラメータ取得
 	public Optional<Student> findById(@PathVariable("id") int id){
 		return repository.findById(id);
 	}
 
-	@ResponseStatus(code= HttpStatus.NO_CONTENT)
-	@DeleteMapping("delete/{id}")
+	//IDで検索して削除
+	@ResponseStatus(code= HttpStatus.NO_CONTENT)  //応答ステータスを指定
+	//リクエスト時のアドレス指定
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+                              //↓パラメータ取得
 	public void deleteStudent(@PathVariable Integer id){
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e){}
 	}
 
+	//データを追加
+	  //リクエスト時のアドレス指定
 	@RequestMapping(value="/add", method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED)  //応答ステータスを指定
+	                           //クライアントから送られてくる値を受け取る。
 	public Student postStudent(@RequestBody Student Student){
 		Student d1 = new Student();
 		d1.setName(Student.getName());
@@ -53,7 +64,10 @@ public class StudentController {
 		return repository.save(d1);
 	}
 
-	@RequestMapping(value="/edit/{id}", method = RequestMethod.PUT)
+	//IDでデータを検索して編集
+	  //リクエスト時のアドレス指定
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	                    //クライアントから送られてくる値を受け取る。
 	public Student edit(@RequestBody Student Student, @PathVariable Integer id ){
 		Optional<Student> d1 = repository.findById(id);
 		if ( d1.isPresent()) {
